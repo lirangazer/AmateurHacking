@@ -84,6 +84,8 @@ this function will break caesar cipher
     """
     table = {}
     print("this is caesar_cipher function")
+    encrypt_text = input("enter word: ")
+
     for key in range(26):
         table[key] = decrypt(encrypt_text, key)
     print(table)
@@ -97,6 +99,15 @@ this function will break caesar cipher
 
 def mssp():
     print("this is MSSP function")
+    cypher_text = input("please enter the cypher text: ")
+    n = int(input("enter the number of array: "))
+    m = int(input("enter the number of array members : "))
+    d = int(input("enter the number of  size of array members : "))
+    if len(cypher_text) != (n*m*d):
+        raise Exception("there was error in the input text check if the encrypt text valid to the algorithm")
+    else:
+        pass
+
 
 
 def main():
