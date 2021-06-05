@@ -5,7 +5,6 @@ the file will implement hash encryption , caesar cipher hack , MSSP encryption
 import sys
 import subprocess
 import os
-import  time
 import hashlib
 
 """
@@ -176,6 +175,7 @@ def mssp():
             counter = 0
             for array_of_nums in new_cypher_after_m:
                 if calcSubsetSumOver(array_of_nums, sum_1):
+                    print("hacking ....")
                     counter += 1
             if counter == n:
                 final_sum = sum_1
