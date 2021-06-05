@@ -148,7 +148,7 @@ def found_min_sum(array_min_sum):
 def mssp():
     print("this is MSSP function")
     cypher_text = str(input("please enter the cypher text: "))
-    n = int(input("enter the number of arrays you want to  "))
+    n = int(input("enter the number of arrays :  "))
     m = int(input("enter the number of array members : "))
     d = int(input("enter the number of  size of array members : "))
     len_cypher_text, len_to_split_n = len(cypher_text), int(len(cypher_text) / n)
@@ -164,13 +164,26 @@ def mssp():
                 [int(m_list[i:i + len_to_split_m]) for i in range(0, len(m_list), len_to_split_m)])
         # this print is for developing peppers
         # print(new_cypher_after_m[0])
+        """
+        this is a help array to get all the minimum numbers from all arrays
+        """
         smin = []
+        """
+                this is a help array to get all the sums  from all arrays
+        """
         min_sum = []
         for i in new_cypher_after_m:
             smin.append(found_min(i))
             min_sum.append(found_min_sum(i))
+        """
+                this is a verbal to get  the maximum  number from the minimum array
+        """
         smin_max = max(smin)
+        """
+                this is a help verbal to get  the minimum summation  from all  sums array
+        """
         min_of_sums = min(min_sum)
+
         for sum_1 in range(smin_max, min_of_sums):
             counter = 0
             for array_of_nums in new_cypher_after_m:
