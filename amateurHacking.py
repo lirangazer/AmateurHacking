@@ -5,6 +5,7 @@ the file will implement hash encryption , caesar cipher hack , MSSP encryption
 import sys
 import subprocess
 import os
+import  time
 import hashlib
 
 """
@@ -97,17 +98,88 @@ this function will break caesar cipher
             print('this is wrong value please try again')
 
 
+def calcSubsetSum(nums, i, sum, strArr):
+    """
+    this function take from class slideshow that implement the calculation of sub set sum
+    :param nums: is the array of numbers the we get to calculate
+    :param i: is parameter that needs for the recursion
+    :param sum: is the sum we want to get
+    :param strArr: this is empty string that needed for return the solution
+    :return: the sub set sum of the arrays
+    """
+    res = False
+    if (sum == 0):
+        res = True
+        # print(strArr)
+    elif (i >= len(nums)):
+        res = False
+    else:
+        res = calcSubsetSum(nums, i + 1, sum - nums[i], strArr + str(nums[i]) + " ") or calcSubsetSum(nums, i + 1, sum, strArr)
+    return res
+
+
+def calcSubsetSumOver(nums, sum):
+    """
+    help function the init the calcSubsetSum function
+    :param nums: the array that given by the calling function
+    :param sum: the sum that given by the calling function
+    :return: the sub set sum that get from calcSubsetSum function
+    """
+    return calcSubsetSum(nums, 0, sum, "")
+
+
+def found_min(array_min):
+    """
+    this function helping to found the  minimum number in the array
+    :param array_min: get  array from calling function
+    :return: the minimum number
+    """
+    return min(array_min)
+
+
+def found_min_sum(array_min_sum):
+    """
+    this function helping to found the  sum of the array
+    :param array_min_sum:get the array form the calling function
+    :return: the summation of the array
+    """
+    return sum(array_min_sum)
+
+
 def mssp():
     print("this is MSSP function")
-    cypher_text = input("please enter the cypher text: ")
-    n = int(input("enter the number of array: "))
+    cypher_text = str(input("please enter the cypher text: "))
+    n = int(input("enter the number of arrays you want to  "))
     m = int(input("enter the number of array members : "))
     d = int(input("enter the number of  size of array members : "))
-    if len(cypher_text) != (n*m*d):
+    len_cypher_text, len_to_split_n = len(cypher_text), int(len(cypher_text) / n)
+    len_to_split_m = int(len_to_split_n / m)
+    new_cypher_after_m = []
+    if len(cypher_text) != (n * m * d):
         raise Exception("there was error in the input text check if the encrypt text valid to the algorithm")
     else:
-        pass
-
+        new_cypher_after_n = [cypher_text[i:i + len_to_split_n] for i in range(0, len_cypher_text, len_to_split_n)]
+        #print(new_cypher_after_n)
+        for m_list in new_cypher_after_n:
+            new_cypher_after_m.append(
+                [int(m_list[i:i + len_to_split_m]) for i in range(0, len(m_list), len_to_split_m)])
+        # this print is for developing peppers
+        # print(new_cypher_after_m[0])
+        smin = []
+        min_sum = []
+        for i in new_cypher_after_m:
+            smin.append(found_min(i))
+            min_sum.append(found_min_sum(i))
+        smin_max = max(smin)
+        min_of_sums = min(min_sum)
+        for sum_1 in range(smin_max, min_of_sums):
+            counter = 0
+            for array_of_nums in new_cypher_after_m:
+                if calcSubsetSumOver(array_of_nums, sum_1):
+                    counter += 1
+            if counter == n:
+                final_sum = sum_1
+        print("the plain text is: %s" % final_sum)
 
 
 def main():
