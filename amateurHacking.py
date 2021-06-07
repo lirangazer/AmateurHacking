@@ -1,4 +1,6 @@
 """
+submit by: Wihbe Brakat ID-203915292
+submit by: Liran Avichzer ID-305103814
 this python script provide system for the amateur hacker
 the file will implement hash encryption , caesar cipher hack , MSSP encryption
 """
@@ -222,6 +224,10 @@ this is the main function
                 else:
                     raise Exception
             elif choice == 2:
+                """
+                the 3 first  lines below is for now what is the word we want to brake 
+                the cipher brake work wall with out thous 3 lines  
+                """
                 text = input("please enter a word to break: ")
                 key = int(input("please enter a key for encryption: "))
                 encrypt_text = encrypt(text, key)
